@@ -1,0 +1,23 @@
+export const up = function up(knex) {
+    return knex.schema.createTable("users", (table) => {
+        table.bigIncrements("id")
+            .primary()
+            .notNullable();
+
+        table.string("first_name", 255)
+            .notNullable();
+
+        table.string("last_name", 255)
+            .notNullable();
+
+        table.bigInteger("foreignkey_id")
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("table");
+    });
+};
+
+export const down = function down(knex) {
+    return knex.schema.dropTable("users");
+};
