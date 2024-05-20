@@ -5,6 +5,7 @@ import { Model } from "objection";
 
 import knexConfig from "../database/knexfile";
 import appConfig from "./config/appConfig";
+import buscaCep from "./domains/addresses/routes";
 import { login } from "./domains/users/controllers";
 import users from "./domains/users/routes";
 import authMiddleware from "./middleware/authMiddleware";
@@ -23,6 +24,7 @@ app.post("/login", login);
 
 app.use(authMiddleware);
 
+app.use("/busca-cep", buscaCep);
 app.use("/users", users);
 
 app.listen(appConfig.appPort, () => {

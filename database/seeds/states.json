@@ -1,0 +1,254 @@
+[
+    {
+        "id": 1,
+        "name": "Acre",
+        "acronym": "AC",
+        "ibge_code": 12,
+        "country_id": 1,
+        "ddd": "68",
+        "time_zone": "America/Rio_branco"
+    },
+    {
+        "id": 2,
+        "name": "Alagoas",
+        "acronym": "AL",
+        "ibge_code": 27,
+        "country_id": 1,
+        "ddd": "82",
+        "time_zone": "America/Maceio"
+    },
+    {
+        "id": 3,
+        "name": "Amazonas",
+        "acronym": "AM",
+        "ibge_code": 13,
+        "country_id": 1,
+        "ddd": "97,92",
+        "time_zone": "America/Manaus"
+    },
+    {
+        "id": 4,
+        "name": "Amapá",
+        "acronym": "AP",
+        "ibge_code": 16,
+        "country_id": 1,
+        "ddd": "96",
+        "time_zone": "America/Belem"
+    },
+    {
+        "id": 5,
+        "name": "Bahia",
+        "acronym": "BA",
+        "ibge_code": 29,
+        "country_id": 1,
+        "ddd": "77,75,73,74,71",
+        "time_zone": "America/Bahia"
+    },
+    {
+        "id": 6,
+        "name": "Ceará",
+        "acronym": "CE",
+        "ibge_code": 23,
+        "country_id": 1,
+        "ddd": "88,85",
+        "time_zone": "America/Fortaleza"
+    },
+    {
+        "id": 7,
+        "name": "Distrito Federal",
+        "acronym": "DF",
+        "ibge_code": 53,
+        "country_id": 1,
+        "ddd": "61",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 8,
+        "name": "Espírito Santo",
+        "acronym": "ES",
+        "ibge_code": 32,
+        "country_id": 1,
+        "ddd": "28,27",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 9,
+        "name": "Goiás",
+        "acronym": "GO",
+        "ibge_code": 52,
+        "country_id": 1,
+        "ddd": "62,64,61",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 10,
+        "name": "Maranhão",
+        "acronym": "MA",
+        "ibge_code": 21,
+        "country_id": 1,
+        "ddd": "99,98",
+        "time_zone": "America/Fortaleza"
+    },
+    {
+        "id": 11,
+        "name": "Minas Gerais",
+        "acronym": "MG",
+        "ibge_code": 31,
+        "country_id": 1,
+        "ddd": "34,37,31,33,35,38,32",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 12,
+        "name": "Mato Grosso do Sul",
+        "acronym": "MS",
+        "ibge_code": 50,
+        "country_id": 1,
+        "ddd": "67",
+        "time_zone": "America/Campo_Grande"
+    },
+    {
+        "id": 13,
+        "name": "Mato Grosso",
+        "acronym": "MT",
+        "ibge_code": 51,
+        "country_id": 1,
+        "ddd": "65,66",
+        "time_zone": "America/Cuiaba"
+    },
+    {
+        "id": 14,
+        "name": "Pará",
+        "acronym": "PA",
+        "ibge_code": 15,
+        "country_id": 1,
+        "ddd": "91,94,93",
+        "time_zone": "America/Belem"
+    },
+    {
+        "id": 15,
+        "name": "Paraíba",
+        "acronym": "PB",
+        "ibge_code": 25,
+        "country_id": 1,
+        "ddd": "83",
+        "time_zone": "America/Fortaleza"
+    },
+    {
+        "id": 16,
+        "name": "Pernambuco",
+        "acronym": "PE",
+        "ibge_code": 26,
+        "country_id": 1,
+        "ddd": "81,87",
+        "time_zone": "America/Recife"
+    },
+    {
+        "id": 17,
+        "name": "Piauí",
+        "acronym": "PI",
+        "ibge_code": 22,
+        "country_id": 1,
+        "ddd": "89,86",
+        "time_zone": "America/Fortaleza"
+    },
+    {
+        "id": 18,
+        "name": "Paraná",
+        "acronym": "PR",
+        "ibge_code": 41,
+        "country_id": 1,
+        "ddd": "43,41,42,44,45,46",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 19,
+        "name": "Rio de Janeiro",
+        "acronym": "RJ",
+        "ibge_code": 33,
+        "country_id": 1,
+        "ddd": "24,22,21",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 20,
+        "name": "Rio Grande do Norte",
+        "acronym": "RN",
+        "ibge_code": 24,
+        "country_id": 1,
+        "ddd": "84",
+        "time_zone": "America/Fortaleza"
+    },
+    {
+        "id": 21,
+        "name": "Rondônia",
+        "acronym": "RO",
+        "ibge_code": 11,
+        "country_id": 1,
+        "ddd": "69",
+        "time_zone": "America/Porto_Velho"
+    },
+    {
+        "id": 22,
+        "name": "Roraima",
+        "acronym": "RR",
+        "ibge_code": 14,
+        "country_id": 1,
+        "ddd": "95",
+        "time_zone": "America/Boa_Vista"
+    },
+    {
+        "id": 23,
+        "name": "Rio Grande do Sul",
+        "acronym": "RS",
+        "ibge_code": 43,
+        "country_id": 1,
+        "ddd": "53,54,55,51",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 24,
+        "name": "Santa Catarina",
+        "acronym": "SC",
+        "ibge_code": 42,
+        "country_id": 1,
+        "ddd": "47,48,49",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 25,
+        "name": "Sergipe",
+        "acronym": "SE",
+        "ibge_code": 28,
+        "country_id": 1,
+        "ddd": "79",
+        "time_zone": "America/Maceio"
+    },
+    {
+        "id": 26,
+        "name": "São Paulo",
+        "acronym": "SP",
+        "ibge_code": 35,
+        "country_id": 1,
+        "ddd": "11,12,13,14,15,16,17,18,19",
+        "time_zone": "America/Sao_Paulo"
+    },
+    {
+        "id": 27,
+        "name": "Tocantins",
+        "acronym": "TO",
+        "ibge_code": 17,
+        "country_id": 1,
+        "ddd": "63",
+        "time_zone": "America/Araguaia"
+    },
+    {
+        "id": 99,
+        "name": "Exterior",
+        "acronym": "EX",
+        "ibge_code": 99,
+        "country_id": null,
+        "ddd": null,
+        "time_zone": "UTC"
+    }
+]

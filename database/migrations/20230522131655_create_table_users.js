@@ -1,6 +1,7 @@
-const ROLES = {
-    ADM: "ADM",
-    EMPLOYEE: "EMPLOYEE",
+const USER_TYPE = {
+    ADMIN: "ADMIN",
+    BRANCH: "BRANCH",
+    PROVIDER: "PROVIDER",
 };
 
 export const up = function up(knex) {
@@ -8,16 +9,12 @@ export const up = function up(knex) {
         table.bigIncrements("id")
             .primary();
 
-        table.string("name", 255)
+        table.string("fantasy_name", 255)
             .notNullable();
 
-        table.enum("role", Object.values(ROLES))
-            .defaultTo(ROLES.EMPLOYEE)
+        table.string("corporate_reason", 255)
+            .unique()
             .notNullable();
-
-        table.bool("status")
-            .notNullable()
-            .defaultTo(true);
 
         table.string("email", 100)
             .unique()
@@ -25,6 +22,24 @@ export const up = function up(knex) {
 
         table.string("password", 100)
             .notNullable();
+
+        table.string("phone_number", 20)
+            .notNullable()
+            .index();
+
+        table.string("cnpj", 14)
+            .unique()
+            .notNullable();
+
+        table.enum("user_type", Object.values(USER_TYPE))
+            .defaultTo(USER_TYPE.BRANCH)
+            .notNullable();
+
+        table.bool("status")
+            .notNullable()
+            .defaultTo(true);
+
+        table.timestamps(false, true);
     });
 };
 

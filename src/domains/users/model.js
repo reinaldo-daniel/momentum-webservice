@@ -12,6 +12,11 @@ class Users extends Model {
     get $hiddenFields() {
         return ["password"];
     }
+
+    omitPassword() {
+        const { password, ...userWithoutPassword } = this;
+        return userWithoutPassword;
+    }
 }
 
 export default Users;

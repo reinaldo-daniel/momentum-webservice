@@ -1,0 +1,40 @@
+import axios from "axios";
+
+import preconditionFailedError from "../../errors/errorPreconditionalFailedError";
+import City from "../cities/model";
+import querySchema from "./validators";
+
+async function buscaCep(request, response, next) {
+    try {
+        const { query } = request;
+
+        await querySchema.validateAsync(query);
+
+        const { cep } = query;
+
+        const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+        if (!data) return null;
+
+        if (data.erro === true) return preconditionFailedError(response, "CEP não encontrado ou inválido.");
+
+        const city = await City.query()
+            .select("id")
+            .where("name", data.localidade)
+            .first();
+
+        if (!city) return null;
+
+        const logradouro = {
+            ...data,
+            cidade_id: city.id,
+        };
+
+        response.status(200)
+            .json(logradouro);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export default buscaCep;

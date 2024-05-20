@@ -28,13 +28,7 @@ function authMiddleware(request, response, next) {
                 return errorUnauthorized(response);
             }
 
-            const userToResponse = {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-            };
-
-            request.user = userToResponse;
+            request.user = user.omitPassword();
 
             return next();
         });
