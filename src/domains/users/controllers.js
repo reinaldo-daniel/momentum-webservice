@@ -131,8 +131,6 @@ async function create(request, response, next) {
     }
 }
 
-// Falta ver o update e as listagens
-
 async function update(request, response, next) {
     try {
         const {
@@ -183,33 +181,63 @@ async function update(request, response, next) {
     }
 }
 
-async function find(request, response, next) {
+async function listBranch(request, response, next) {
     try {
-        const { query } = request;
+        const {
+            query,
+            user: userRequest,
+        } = request;
 
-        const page = Number(query.page) || 1;
-        const limit = Number(query.limit) || 10;
+        if (userRequest.user_type === "PROVIDER") return unauthorized(response);
 
-        const offset = (page - 1) * limit;
+        const { name, cnpj } = query;
 
-        const users = await Users.query()
-            .select("id", "name", "email", "role", "status")
-            .limit(limit)
-            .offset(offset);
+        let usersQuery = Users.query()
+            .where("user_type", "BRANCH");
 
-        const totalUsers = await Users.query()
-            .count("* as count");
+        if (name) {
+            usersQuery = usersQuery.where("fantasy_name", "like", `%${name}%`);
+        }
 
-        const totalPages = Math.ceil(totalUsers[0].count / limit);
+        if (cnpj) {
+            usersQuery = usersQuery.where("cnpj", cnpj);
+        }
+
+        const branches = await usersQuery;
 
         response.status(200)
-            .send({
-                totalItems: totalUsers[0].count,
-                totalPages,
-                currentPage: page,
-                pageSize: limit,
-                users,
-            });
+            .send(branches);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function listProvider(request, response, next) {
+    try {
+        const {
+            query,
+            user: userRequest,
+        } = request;
+
+        if (userRequest.user_type === "PROVIDER") return unauthorized(response);
+
+        const { name, cnpj } = query;
+
+        let usersQuery = Users.query()
+            .where("user_type", "PROVIDER");
+
+        if (name) {
+            usersQuery = usersQuery.where("fantasy_name", "like", `%${name}%`);
+        }
+
+        if (cnpj) {
+            usersQuery = usersQuery.where("cnpj", cnpj);
+        }
+
+        const branches = await usersQuery;
+
+        response.status(200)
+            .send(branches);
     } catch (error) {
         next(error);
     }
@@ -220,5 +248,6 @@ export {
     refresh,
     create,
     update,
-    find,
+    listBranch,
+    listProvider,
 };

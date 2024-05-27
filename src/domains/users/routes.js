@@ -1,7 +1,8 @@
 import { Router } from "express";
 
 import {
-    create, find, refresh, update,
+    create, refresh, update, listBranch,
+    listProvider,
 } from "./controllers";
 
 const router = Router();
@@ -9,6 +10,7 @@ const router = Router();
 router.put("/refresh", refresh);
 router.post("/", create);
 router.put("/:userId", update);
-router.get("/", find);
+router.get("/list-branch", listBranch);
+router.get("/list-provider", listProvider);
 
 export default router;
