@@ -14,10 +14,6 @@ import validations from "./validators";
 const { UniqueViolationError, ForeignKeyViolationError } = pkg;
 
 function catchCallback(error, response) {
-    console.log("/////////////////////////////////////////////////////////////////");
-    console.log(error);
-    console.log("/////////////////////////////////////////////////////////////////");
-
     if (error instanceof UniqueViolationError) {
         switch (error.constraint) {
         case "users.users_email_unique":
