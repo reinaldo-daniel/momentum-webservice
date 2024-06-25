@@ -19,11 +19,13 @@ export const up = function up(knex) {
             .references("id")
             .inTable("users");
 
-        table.bigInteger("city_id")
-            .unsigned()
+        table.string("city", 100)
             .notNullable()
-            .references("id")
-            .inTable("cities");
+            .index();
+
+        table.string("state", 100)
+            .notNullable()
+            .index();
 
         table.timestamps(false, true);
         table.dateTime("deleted_at")

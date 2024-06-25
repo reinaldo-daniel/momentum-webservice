@@ -1,8 +1,8 @@
 import { Model } from "objection";
 
-class Country extends Model {
+class Attachment extends Model {
     static get tableName() {
-        return "countries";
+        return "attachments";
     }
 
     static get idColumn() {
@@ -10,4 +10,4 @@ class Country extends Model {
     }
 }
 
-export default Country;
+export default Attachment;

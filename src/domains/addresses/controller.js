@@ -1,7 +1,6 @@
 import axios from "axios";
 
 import preconditionFailedError from "../../errors/errorPreconditionalFailedError";
-import City from "../cities/model";
 import querySchema from "./validators";
 
 async function buscaCep(request, response, next) {
@@ -18,16 +17,8 @@ async function buscaCep(request, response, next) {
 
         if (data.erro === true) return preconditionFailedError(response, "CEP não encontrado ou inválido.");
 
-        const city = await City.query()
-            .select("id")
-            .where("name", data.localidade)
-            .first();
-
-        if (!city) return null;
-
         const logradouro = {
             ...data,
-            cidade_id: city.id,
         };
 
         response.status(200)

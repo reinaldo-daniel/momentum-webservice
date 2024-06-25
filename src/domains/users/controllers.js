@@ -14,6 +14,10 @@ import validations from "./validators";
 const { UniqueViolationError, ForeignKeyViolationError } = pkg;
 
 function catchCallback(error, response) {
+    console.log("/////////////////////////////////////////////////////////////////");
+    console.log(error);
+    console.log("/////////////////////////////////////////////////////////////////");
+
     if (error instanceof UniqueViolationError) {
         switch (error.constraint) {
         case "users.users_email_unique":
@@ -157,10 +161,15 @@ async function update(request, response, next) {
             ...body,
         };
 
-        if (body.password) {
-            const salt = bcrypt.genSaltSync(10);
+        if (body.currentPassword && body.newPassword) {
+            const isMatch = bcrypt.compareSync(body.currentPassword, userExist.password);
 
-            const hashPassword = bcrypt.hashSync(body.password, salt);
+            if (!isMatch) {
+                return response.status(400).send({ error: "Current password is incorrect" });
+            }
+
+            const salt = bcrypt.genSaltSync(10);
+            const hashPassword = bcrypt.hashSync(body.newPassword, salt);
 
             userUpdated = {
                 ...userUpdated,
@@ -168,9 +177,56 @@ async function update(request, response, next) {
             };
         }
 
-        const user = await Users.transaction((transacting) => {
+        delete userUpdated.newPassword;
+        delete userUpdated.currentPassword;
+
+        const user = await Users.transaction(async (transacting) => {
+            console.log("/////////////////////////////////////////////////////////////////");
+            console.log();
+            console.log("/////////////////////////////////////////////////////////////////");
+
+            const { address: addressRequest } = userUpdated;
+
+            const address = await Address.query(transacting)
+                .where("user_id", userId)
+                .first();
+
+            if (address) {
+                await Address.query()
+                    .updateAndFetchById(address.id, {
+                        street: addressRequest.street,
+                        number: addressRequest.number,
+                        complement: addressRequest.complement,
+                        cep: addressRequest.cep,
+                        district: addressRequest.district,
+                        city: addressRequest.city,
+                        state: addressRequest.state,
+                    });
+            } else {
+                await Address.query()
+                    .insertAndFetch({
+                        street: addressRequest.street,
+                        number: addressRequest.number,
+                        complement: addressRequest.complement,
+                        cep: addressRequest.cep,
+                        district: addressRequest.district,
+                        user_id: userId,
+                        city: addressRequest.city,
+                        state: addressRequest.state,
+                    });
+            }
+
             return Users.query(transacting)
-                .updateAndFetchById(userId, userUpdated);
+                .updateAndFetchById(userId, {
+                    fantasy_name: userUpdated.fantasy_name,
+                    corporate_reason: userUpdated.corporate_reason,
+                    email: userUpdated.email,
+                    password: userUpdated.password,
+                    phone_number: userUpdated.phone_number,
+                    cnpj: userUpdated.cnpj,
+                    user_type: userUpdated.user_type,
+                    status: userUpdated.status,
+                });
         });
 
         response.status(200)
@@ -243,6 +299,50 @@ async function listProvider(request, response, next) {
     }
 }
 
+async function profile(request, response, next) {
+    try {
+        const { user: userRequest } = request;
+
+        const user = await Users.query()
+            .select("users.*", "address.*")
+            .where("users.id", userRequest.id)
+            .andWhere("users.status", true)
+            .leftJoin("address", "users.id", "address.user_id")
+            .first();
+
+        if (!user) return notFound(response);
+
+        response.status(200)
+            .send(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function get(request, response, next) {
+    try {
+        const { params } = request;
+
+        const userId = Number(params.userId);
+
+        if (!userId) return notFound(response);
+
+        const userExist = await Users.query()
+            .select("users.*", "address.*")
+            .where("users.id", userId)
+            .andWhere("users.status", true)
+            .leftJoin("address", "users.id", "address.user_id")
+            .first();
+
+        if (!userExist) return notFound(response);
+
+        response.status(200)
+            .send(userExist);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export {
     login,
     refresh,
@@ -250,4 +350,6 @@ export {
     update,
     listBranch,
     listProvider,
+    profile,
+    get,
 };

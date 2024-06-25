@@ -63,8 +63,11 @@ const userCreate = Joi.object({
         {
             is: [USER_TYPE.BRANCH, USER_TYPE.PROVIDER],
             then: Joi.object({
-                city_id: Joi.number()
-                    .required(),
+                city: Joi.string()
+                    .max(100),
+
+                state: Joi.string()
+                    .max(100),
 
                 street: Joi.string()
                     .max(200)
@@ -108,7 +111,12 @@ const userUpdate = Joi.object({
         .lowercase()
         .max(200),
 
-    password: Joi.string()
+    currentPassword: Joi.string()
+        .trim()
+        .min(6)
+        .max(80),
+
+    newPassword: Joi.string()
         .trim()
         .min(6)
         .max(80),
@@ -131,7 +139,11 @@ const userUpdate = Joi.object({
         {
             is: [USER_TYPE.BRANCH, USER_TYPE.PROVIDER],
             then: Joi.object({
-                city_id: Joi.number(),
+                city: Joi.string()
+                    .max(100),
+
+                state: Joi.string()
+                    .max(100),
 
                 street: Joi.string()
                     .max(200),

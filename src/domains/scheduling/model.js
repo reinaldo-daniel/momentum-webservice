@@ -1,8 +1,8 @@
 import { Model } from "objection";
 
-class Address extends Model {
+class Scheduling extends Model {
     static get tableName() {
-        return "address";
+        return "schedules";
     }
 
     static get idColumn() {
@@ -10,4 +10,4 @@ class Address extends Model {
     }
 }
 
-export default Address;
+export default Scheduling;
